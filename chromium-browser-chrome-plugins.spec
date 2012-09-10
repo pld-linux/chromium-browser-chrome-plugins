@@ -1,3 +1,5 @@
+# NOTE
+# - this is obsolete, use google-chrome.spec to build plugin packages
 
 %define		svnrev	139451
 %define		state	beta
