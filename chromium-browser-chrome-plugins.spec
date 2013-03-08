@@ -3,7 +3,7 @@
 
 %define		svnrev	186726
 %define		state	stable_current
-%define		rel		0.1
+%define		rel		0.2
 %define		google_name	google-chrome
 Summary:	Plugins from Google Chrome for Chromium browser
 Summary(pl.UTF-8):	Wtyczki z przeglądarki Google Chrome dla Chromium
@@ -103,7 +103,7 @@ cp -a chrome/libpdf.so $RPM_BUILD_ROOT%{_libdir}/chromium-browser/plugins
 cp -a chrome/libgcflashplayer.so $RPM_BUILD_ROOT%{_libdir}/chromium-browser/plugins
 %endif
 %ifarch %{x8664}
-cp -a chrome/PepperFlash $RPM_BUILD_ROOT%{_libdir}/chromium-browser
+cp -a chrome/PepperFlash/{libpepflashplayer.so,manifest.json} $RPM_BUILD_ROOT%{_libdir}/chromium-browser/plugins
 %endif
 
 %clean
@@ -122,7 +122,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/chromium-browser/plugins/libgcflashplayer.so
 %endif
 %ifarch %{x8664}
-%dir %{_libdir}/chromium-browser/PepperFlash
-%attr(755,root,root) %{_libdir}/chromium-browser/PepperFlash/libpepflashplayer.so
-%{_libdir}/chromium-browser/PepperFlash/manifest.json
+%attr(755,root,root) %{_libdir}/chromium-browser/plugins/libpepflashplayer.so
+%{_libdir}/chromium-browser/plugins/manifest.json
 %endif
