@@ -1,21 +1,21 @@
 # NOTE
 # - this is obsolete, use google-chrome.spec to build plugin packages
 
-%define		svnrev	139451
-%define		state	beta
+%define		svnrev	186726
+%define		state	stable_current
 %define		rel		0.1
 %define		google_name	google-chrome
 Summary:	Plugins from Google Chrome for Chromium browser
 Summary(pl.UTF-8):	Wtyczki z przeglądarki Google Chrome dla Chromium
 Name:		chromium-browser-chrome-plugins
-Version:	20.0.1132.21
+Version:	25.0.1364.160
 Release:	%{svnrev}.%{rel}
 License:	Multiple, see http://chrome.google.com/
 Group:		Applications/Networking
-Source0:	http://dl.google.com/linux/chrome/rpm/stable/i386/%{google_name}-%{state}-%{version}-%{svnrev}.i386.rpm
-# Source0-md5:	a7777561e078564a0ec851802de79c1f
-Source1:	http://dl.google.com/linux/chrome/rpm/stable/x86_64/%{google_name}-%{state}-%{version}-%{svnrev}.x86_64.rpm
-# Source1-md5:	a2fa86e0a50dd59bb8eae9932ea18efa
+Source0:	https://dl.google.com/linux/direct/%{google_name}-%{state}_i386.rpm
+# Source0-md5:	82ef51944927db96c53f62e51b913a0a
+Source1:	https://dl.google.com/linux/direct/%{google_name}-%{state}_x86_64.rpm
+# Source1-md5:	9dbde8b12e03e0601afa2db69671599f
 URL:		http://chrome.google.com/
 BuildRequires:	rpm-utils
 BuildRequires:	rpmbuild(macros) >= 1.453
@@ -96,11 +96,11 @@ chmod a+x chrome/lib*.so*
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/chromium-browser
+install -d $RPM_BUILD_ROOT%{_libdir}/chromium-browser/plugins
 
-cp -a chrome/libpdf.so $RPM_BUILD_ROOT%{_libdir}/chromium-browser
+cp -a chrome/libpdf.so $RPM_BUILD_ROOT%{_libdir}/chromium-browser/plugins
 %ifarch %{ix86}
-cp -a chrome/libgcflashplayer.so $RPM_BUILD_ROOT%{_libdir}/chromium-browser
+cp -a chrome/libgcflashplayer.so $RPM_BUILD_ROOT%{_libdir}/chromium-browser/plugins
 %endif
 %ifarch %{x8664}
 cp -a chrome/PepperFlash $RPM_BUILD_ROOT%{_libdir}/chromium-browser
@@ -114,12 +114,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files pdf
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/chromium-browser/libpdf.so
+%attr(755,root,root) %{_libdir}/chromium-browser/plugins/libpdf.so
 
 %files flash_player
 %defattr(644,root,root,755)
 %ifarch %{ix86}
-%attr(755,root,root) %{_libdir}/chromium-browser/libgcflashplayer.so
+%attr(755,root,root) %{_libdir}/chromium-browser/plugins/libgcflashplayer.so
 %endif
 %ifarch %{x8664}
 %dir %{_libdir}/chromium-browser/PepperFlash
